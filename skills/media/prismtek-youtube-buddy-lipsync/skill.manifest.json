@@ -1,0 +1,19 @@
+{
+  "name": "prismtek-youtube-buddy-lipsync",
+  "version": "1.1.0",
+  "description": "Omni Buddy reference for the Prismtek/Buddy talking-host lip-sync workflow.",
+  "canonical_runtime": "codysumpter-cloud/buddy-agent#18",
+  "operator_reference": "codysumpter-cloud/buddy-brain#315",
+  "requires": {
+    "python": ">=3.11",
+    "commands": ["magick", "ffmpeg", "ffprobe"]
+  },
+  "entrypoints": {
+    "generate_visemes": "skills/media/prismtek-youtube-buddy-lipsync/scripts/generate_buddy_v12_visemes.py",
+    "render_lipsync": "skills/media/prismtek-youtube-buddy-lipsync/scripts/prismtek_youtube_avatar_lipsync.py"
+  },
+  "notes": [
+    "Keep local-device behavior aligned with buddy-agent.",
+    "Store generated media outside git."
+  ]
+}
