@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prismtek.dev/schemas/buddy-device-event-envelope.schema.json",
+  "title": "Buddy Device Event Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "modality",
+    "device_source",
+    "user_intent",
+    "safety_class",
+    "observation_refs",
+    "proposed_action",
+    "review_status"
+  ],
+  "properties": {
+    "schema_version": { "const": "buddy.device_event.v1" },
+    "event_id": { "type": "string", "minLength": 1 },
+    "modality": {
+      "type": "string",
+      "enum": ["voice", "vision", "sensor", "touch", "transport", "system"]
+    },
+    "device_source": { "type": "string", "minLength": 1 },
+    "user_intent": { "type": "string", "minLength": 1 },
+    "safety_class": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "blocked"]
+    },
+    "observation_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "proposed_action": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "action_type": { "type": "string" },
+        "adapter": { "type": "string" },
+        "requires_human_approval": { "type": "boolean" },
+        "arguments": { "type": "object" }
+      }
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["pending", "approved", "approved_with_notes", "revise", "escalate", "block"]
+    }
+  }
+}
