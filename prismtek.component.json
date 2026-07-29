@@ -1,0 +1,49 @@
+{
+  "$schema": "https://raw.githubusercontent.com/codysumpter-cloud/buddy-universal-agent-profile/main/schemas/prismtek-component.schema.json",
+  "schema_version": "1.0",
+  "component": "omni-buddy",
+  "repository": "codysumpter-cloud/omni-buddy",
+  "role": "local and device runtime for voice, vision, models, transport, and embodied interaction",
+  "owns": [
+    "voice-runtime",
+    "vision-runtime",
+    "device-runtime",
+    "local-model-routing",
+    "transport"
+  ],
+  "provides": [
+    {
+      "contract": "omni.device-event.v1",
+      "path": "OMNI_INTEGRATION_MAP.md"
+    }
+  ],
+  "consumes": [
+    {
+      "contract": "buap.policy-profile.v1",
+      "from": "buddy-universal-agent-profile"
+    },
+    {
+      "contract": "buddy.execution-receipt.v1",
+      "from": "buddy-agent"
+    },
+    {
+      "contract": "knowledge.graph.v1",
+      "from": "knowledge-vault"
+    }
+  ],
+  "events": {
+    "emits": [
+      "device_registered",
+      "local_memory_created"
+    ],
+    "receives": [
+      "policy_compiled",
+      "execution_verified"
+    ]
+  },
+  "health_checks": [
+    "./scripts/bmo_omni_doctor.sh",
+    "./scripts/run_validation_matrix.sh"
+  ],
+  "stack_map": "https://github.com/codysumpter-cloud/buddy-universal-agent-profile/blob/main/linked-repos/prismtek-stack.manifest.json"
+}
